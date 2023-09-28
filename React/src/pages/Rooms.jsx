@@ -17,7 +17,12 @@ export default function Rooms() {
             <h1 className="text-gray-700 text-4xl">All Rooms</h1>
 
             {data.map((room) => (
-                <p key={room.code}>{room.code}</p>
+                <div className="flex gap-5 items-center" key={room.code}>
+                    <p>{room.code}</p>
+                    <p>{room.type}</p>
+                    <p>{room.capacity}</p>
+                    <p>{room.price}</p>
+                </div>
             ))}
         </>
     );
