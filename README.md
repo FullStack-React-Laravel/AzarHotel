@@ -3,7 +3,7 @@
 ## Setup and run project
 
 ### Fronend
-- go to frontend resource `cd React`
+- Go to frontend resource `cd React`
 - Install react packages `npm install`
 - Run server frontend `npm run dev`
 
