@@ -19,7 +19,7 @@ export async function getRooms() {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
+            "Accept": "application/json",
             // "X-CSRF-Token": document.querySelector('input[name=_token]').value
         },
     });
@@ -53,7 +53,7 @@ export async function addNewRoomApi(newRoom) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Accept: "application/json",
+            "Accept": "application/json",
 
             // "X-CSRF-Token": document.querySelector('input[name=_token]').value
         },

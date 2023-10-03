@@ -23,7 +23,9 @@ class RoomController extends Controller
     {
         $room = $request->validated();
 
-        Room::create($request);
+        Room::create($room);
+
+        return ['status' => 'success'];
     }
 
     /**
