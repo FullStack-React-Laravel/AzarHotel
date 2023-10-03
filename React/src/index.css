@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* our style components */
+@layer components {
+    .input {
+        @apply w-full rounded-md border border-gray-200 px-4 py-2 transition-all duration-300 focus:outline-none focus:ring;
+    }
+}
+.spinner {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid #4e46e566;
+    border-right-color: #4f46e5;
+    animation: s2 1s infinite linear;
+}
+@keyframes s2 {
+    to {
+        transform: rotate(1turn);
+    }
+}

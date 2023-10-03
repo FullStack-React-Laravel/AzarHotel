@@ -13,6 +13,7 @@
  * - data get => room('id','code','type','price','capacity')
  * - data set => room('code','type','price','capacity')
  */
+
 export async function getRooms() {
     const res = await fetch("http://localhost:8000/api/rooms", {
         method: "GET",
@@ -23,7 +24,6 @@ export async function getRooms() {
         },
     });
 
-    console.log(res);
     if (!res.ok) {
         throw new Error(`cant get rooms`);
     }
@@ -36,16 +36,33 @@ export async function deletingRoomApi(roomId) {
     console.log(roomId);
     const res = await fetch(`http://localhost:8000/api/rooms/${roomId}`, {
         method: "DELETE",
-        // headers: {
-        //     "Content-Type": "application/json",
-        //     Accept: "application/json",
-        //     // "X-CSRF-Token": document.querySelector('input[name=_token]').value
-        // },
     });
 
     console.log(res);
     if (!res.ok) {
         throw new Error(`cant delete room`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+}
+
+export async function addNewRoomApi(newRoom) {
+    console.log(JSON.stringify(newRoom));
+    const res = await fetch(`http://localhost:8000/api/rooms`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+
+            // "X-CSRF-Token": document.querySelector('input[name=_token]').value
+        },
+        body: JSON.stringify(newRoom),
+    });
+
+    console.log(res);
+    if (!res.ok) {
+        throw new Error(`cant Add new room`);
     }
     const data = await res.json();
     console.log(data);

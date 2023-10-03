@@ -4,6 +4,7 @@ import TableCell from "./TableCell";
 import Button from "./Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deletingRoomApi } from "../services/apiRooms";
+import toast from "react-hot-toast";
 
 export default function TableRow({ room }) {
     const { id, code, type, capacity, price } = room;
@@ -11,11 +12,11 @@ export default function TableRow({ room }) {
 
     const { mutate: deletingRoom, isLoading } = useMutation({
         mutationFn: deletingRoomApi,
-
         onSuccess: () => {
             query.invalidateQueries({
                 queryKey: ["rooms"],
             });
+            toast.success("Room succefully deleted");
         },
     });
 
@@ -34,7 +35,7 @@ export default function TableRow({ room }) {
             <TableCell>{price}&pound;</TableCell>
             <TableCell classes=" flex gap-8 text-xl">
                 <FaRegEdit className=" text-gray-700" />
-                <Button onClick={() => deletingRoom(id)} type="none">
+                <Button onClick={() => deletingRoom(id)} typeOfButton="none">
                     <MdOutlineDeleteOutline className=" text-red-500" />
                 </Button>
             </TableCell>
