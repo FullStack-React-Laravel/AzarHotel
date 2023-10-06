@@ -23,7 +23,7 @@ export async function getRooms() {
             // "X-CSRF-Token": document.querySelector('input[name=_token]').value
         },
     });
-
+    
     if (!res.ok) {
         throw new Error(`cant get rooms`);
     }

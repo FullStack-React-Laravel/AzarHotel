@@ -1,14 +1,27 @@
+import { useState } from "react";
 import { MdOutlineHotel } from "react-icons/md";
+import { IoHomeOutline } from "react-icons/io5";
 import MainNavLink from "./MainNavLink";
+import Col from "./Col";
+
 export default function MainNav() {
-  return (
-    <div className=" mt-8">
-      <MainNavLink to="home">
-        <MdOutlineHotel className=" group-hover/navItem:text-purple-950" />
-      </MainNavLink>
-      <MainNavLink to="rooms">
-        <MdOutlineHotel className=" group-hover/navItem:text-purple-950" />
-      </MainNavLink>
-    </div>
-  );
+    const [active, setActive] = useState("home");
+    return (
+        <Col classes=" mt-10 gap-2">
+            <MainNavLink active={active} onClick={setActive} to="home">
+                <IoHomeOutline
+                    className={`text-2xl group-hover/navItem:text-indigo-600 ${
+                        active === "home" ? "text-indigo-600" : ""
+                    }`}
+                />
+            </MainNavLink>
+            <MainNavLink active={active} onClick={setActive} to="rooms">
+                <MdOutlineHotel
+                    className={`text-2xl group-hover/navItem:text-indigo-600 ${
+                        active === "rooms" ? "text-indigo-600" : ""
+                    }`}
+                />
+            </MainNavLink>
+        </Col>
+    );
 }
