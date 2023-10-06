@@ -47,3 +47,11 @@
         transform: rotate(1turn);
     }
 }
+
+a.active {
+    color: #1f2937;
+    background: #f3f4f6;
+}
+a.active svg {
+    color: #4f46e5;
+}

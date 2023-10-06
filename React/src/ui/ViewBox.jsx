@@ -37,7 +37,7 @@ function Window({ children, width, window }) {
             >
                 <button
                     onClick={() => setOpenName("")}
-                    className=" absolute right-8 top-8 rounded-md px-2 text-5xl text-gray-600 transition-all duration-300 hover:bg-gray-100"
+                    className=" absolute right-8 top-8 rounded-md px-2 text-3xl text-gray-600 transition-all duration-300 hover:bg-gray-100"
                 >
                     &times;
                 </button>
