@@ -9,8 +9,8 @@ import Error from "./Error";
 import RowForm from "./RowForm";
 import toast from "react-hot-toast";
 
-export default function CreateRoomForm({ showForm }) {
-    const { register, handleSubmit, reset, formState } = useForm();
+export default function CreateRoomForm({ showForm, onCloseViewBox }) {
+    const { register, handleSubmit, formState } = useForm();
     const { errors } = formState;
     const query = useQueryClient();
 
@@ -78,7 +78,11 @@ export default function CreateRoomForm({ showForm }) {
                     />
                 </RowForm>
                 <div className="flex w-full items-center justify-end gap-4">
-                    <Button typeOfButton="secondary" onClick={() => reset()}>
+                    <Button
+                        typeOfButton="secondary"
+                        onClick={() => onCloseViewBox?.()}
+                        type="reset"
+                    >
                         Cancel
                     </Button>
                     <Button disabled={isCreating}>Save</Button>
