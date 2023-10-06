@@ -5,8 +5,9 @@ import Button from "./Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deletingRoomApi } from "../services/apiRooms";
 import toast from "react-hot-toast";
+import Table from "./Table";
 
-export default function TableRow({ room }) {
+export default function RoomRow({ room }) {
     const { id, code, type, capacity, price } = room;
     const query = useQueryClient();
 
@@ -22,12 +23,7 @@ export default function TableRow({ room }) {
 
     if (isLoading) return <p>...deleting Room</p>;
     return (
-        <div
-            className={`grid grid-cols-[10rem_1fr_1fr_1fr_1fr_1fr] border-b border-b-gray-100 ${
-                type === "Gold" ? "font-bold text-indigo-600" : "text-gray-600"
-            } `}
-            rol="row"
-        >
+        <Table.Row>
             <TableCell></TableCell>
             <TableCell>{code}</TableCell>
             <TableCell>{type}</TableCell>
@@ -39,6 +35,6 @@ export default function TableRow({ room }) {
                     <MdOutlineDeleteOutline className=" text-red-500" />
                 </Button>
             </TableCell>
-        </div>
+        </Table.Row>
     );
 }
