@@ -27,7 +27,7 @@ export default function CreateRoomForm({ showForm, onCloseViewBox }) {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="px-12 pb-8 pt-12" onSubmit={handleSubmit(onSubmit)}>
             <Col classes="gap-6">
                 <Col classes="gap-2">
                     <label htmlFor="roomNumber">Room Number</label>
@@ -77,7 +77,7 @@ export default function CreateRoomForm({ showForm, onCloseViewBox }) {
                         type="number"
                     />
                 </RowForm>
-                <div className="flex w-full items-center justify-end gap-4">
+                <div className="mt-4 flex w-full items-center justify-end gap-4">
                     <Button
                         typeOfButton="secondary"
                         onClick={() => onCloseViewBox?.()}

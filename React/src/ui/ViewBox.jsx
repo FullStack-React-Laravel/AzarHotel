@@ -31,13 +31,13 @@ function Window({ children, width, window }) {
             <div
                 ref={ref}
                 id="view-box"
-                className={`absolute left-1/2 top-1/2 max-h-[700px] translate-x-[-50%] translate-y-[-50%] overflow-scroll rounded-3xl bg-white px-10 pb-10 pt-20 ${
+                className={`absolute left-1/2 top-1/2 max-h-[700px] translate-x-[-50%] translate-y-[-50%] overflow-scroll rounded-3xl bg-white ${
                     width ? width : ""
                 }`}
             >
                 <button
                     onClick={() => setOpenName("")}
-                    className=" absolute right-8 top-8 rounded-md px-2 text-3xl text-gray-600 transition-all duration-300 hover:bg-gray-100"
+                    className=" absolute right-4 top-4 rounded-md px-2 text-3xl text-gray-600 transition-all duration-300 hover:bg-gray-100"
                 >
                     &times;
                 </button>
