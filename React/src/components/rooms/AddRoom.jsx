@@ -5,10 +5,10 @@ import CreateRoomForm from "./CreateRoomForm";
 export default function AddRoom() {
     return (
         <ViewBox>
-            <ViewBox.Open open="roomForm">
+            <ViewBox.Open open="addRoom">
                 <Button>Add Room</Button>
             </ViewBox.Open>
-            <ViewBox.Window window="roomForm" width="w-[500px]">
+            <ViewBox.Window window="addRoom" width="w-[450px]">
                 <CreateRoomForm />
             </ViewBox.Window>
         </ViewBox>

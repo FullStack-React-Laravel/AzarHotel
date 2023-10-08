@@ -11,17 +11,20 @@ export default function Rooms() {
     const { rooms, isError, isLoading, error } = useGetAllRooms();
 
     if (isError) return <p>{error.message}</p>;
-    if (isLoading) return <Spinner text="loading rooms..." />;
 
     return (
-        <>
-            <Col classes="gap-12">
-                <Row>
-                    <h1 className="text-4xl text-gray-700">All Rooms</h1>
-                    <AddRoom />
-                </Row>
-                <RoomTable rooms={rooms} />
-            </Col>
-        </>
+        <Col classes="gap-12 min-h-screen relative">
+            {isLoading ? (
+                <Spinner text="loading rooms..." />
+            ) : (
+                <>
+                    <Row>
+                        <h1 className="text-4xl text-gray-700">All Rooms</h1>
+                        <AddRoom />
+                    </Row>
+                    <RoomTable rooms={rooms} />
+                </>
+            )}
+        </Col>
     );
 }

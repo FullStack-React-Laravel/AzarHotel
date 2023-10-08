@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Table from "./Table";
 import ViewBox from "./ViewBox";
 import DeletingConfirm from "./DeletingConfirm";
+import CreateRoomForm from "../components/rooms/CreateRoomForm";
 
 export default function RoomRow({ room }) {
     const { id: roomId, code, type, capacity, price } = room;
@@ -31,8 +32,17 @@ export default function RoomRow({ room }) {
             <TableCell>{capacity}</TableCell>
             <TableCell>{price}&pound;</TableCell>
             <TableCell classes=" flex gap-8 text-xl">
-                <FaRegEdit className=" text-gray-700" />
                 <ViewBox>
+                    <ViewBox.Open open="edit">
+                        <Button typeOfButton="none">
+                            <FaRegEdit className=" text-gray-700" />
+                        </Button>
+                    </ViewBox.Open>
+
+                    <ViewBox.Window width="w-[450px]" window="edit">
+                        <CreateRoomForm id={roomId} />
+                    </ViewBox.Window>
+
                     <ViewBox.Open open="delete">
                         <Button typeOfButton="none">
                             <MdOutlineDeleteOutline className=" text-red-500" />
