@@ -2,27 +2,15 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import TableCell from "./TableCell";
 import Button from "./Button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deletingRoomApi } from "../services/apiRooms";
-import toast from "react-hot-toast";
 import Table from "./Table";
 import ViewBox from "./ViewBox";
 import DeletingConfirm from "./DeletingConfirm";
 import CreateRoomForm from "../components/rooms/CreateRoomForm";
+import useDeleteRoom from "../components/rooms/hooks/useDeleteRoom";
 
 export default function RoomRow({ room }) {
     const { id: roomId, code, type, capacity, price } = room;
-    const query = useQueryClient();
-
-    const { mutate: deletingRoom, isLoading: isDeleting } = useMutation({
-        mutationFn: deletingRoomApi,
-        onSuccess: () => {
-            toast.success("Room succefully deleted");
-            query.invalidateQueries({
-                queryKey: ["rooms"],
-            });
-        },
-    });
+    const { deletingRoom, isDeleting } = useDeleteRoom();
 
     return (
         <Table.Row>

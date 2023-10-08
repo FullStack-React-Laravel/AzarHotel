@@ -9,7 +9,7 @@ import Error from "./Error";
 import RowForm from "./RowForm";
 import toast from "react-hot-toast";
 
-export default function CreateRoomForm({ showForm, onCloseViewBox }) {
+export default function CreateRoomForm({ id, showForm, onCloseViewBox }) {
     const { register, handleSubmit, formState } = useForm();
     const { errors } = formState;
     const query = useQueryClient();
