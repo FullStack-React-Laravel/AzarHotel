@@ -21,16 +21,18 @@ export default function RoomRow({ room }) {
             <TableCell>{price}&pound;</TableCell>
             <TableCell classes=" flex gap-8 text-xl">
                 <ViewBox>
+                    {/* ---------- View Box Popop To Edit ---------- */}
                     <ViewBox.Open open="edit">
                         <Button typeOfButton="none">
                             <FaRegEdit className=" text-gray-700" />
                         </Button>
                     </ViewBox.Open>
-
                     <ViewBox.Window width="w-[450px]" window="edit">
-                        <CreateRoomForm id={roomId} />
+                        <CreateRoomForm id={roomId} room={room} />
                     </ViewBox.Window>
+                    {/* ---------------------------------------- */}
 
+                    {/* ---------- View Box Popop To Delete ---------- */}
                     <ViewBox.Open open="delete">
                         <Button typeOfButton="none">
                             <MdOutlineDeleteOutline className=" text-red-500" />
@@ -42,6 +44,7 @@ export default function RoomRow({ room }) {
                             onDelete={() => deletingRoom(roomId)}
                         />
                     </ViewBox.Window>
+                    {/* ---------------------------------------- */}
                 </ViewBox>
             </TableCell>
         </Table.Row>

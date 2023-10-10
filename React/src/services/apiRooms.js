@@ -58,11 +58,32 @@ export async function addNewRoomApi(newRoom) {
         body: JSON.stringify(newRoom),
     });
 
-    console.log(res);
     if (!res.ok) {
         throw new Error(`cant Add new room`);
     }
     const data = await res.json();
-    console.log(data);
+
     return data;
+}
+
+export async function editRoomApi(id, room) {
+    console.log(JSON.stringify(room), id);
+    return;
+    // const res = await fetch(`http://localhost:8000/api/rooms`, {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         Accept: "application/json",
+
+    //         // "X-CSRF-Token": document.querySelector('input[name=_token]').value
+    //     },
+    //     body: JSON.stringify(newRoom),
+    // });
+
+    // if (!res.ok) {
+    //     throw new Error(`cant Add new room`);
+    // }
+    // const data = await res.json();
+
+    // return data;
 }

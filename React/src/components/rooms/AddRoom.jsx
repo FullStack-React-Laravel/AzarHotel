@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import Button from "../../ui/Button";
 import ViewBox from "../../ui/ViewBox";
 import CreateRoomForm from "./CreateRoomForm";

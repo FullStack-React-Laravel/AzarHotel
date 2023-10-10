@@ -1,29 +1,32 @@
 import { useForm } from "react-hook-form";
 import { validateRoomNumber } from "./servicesRoom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addNewRoomApi } from "../../services/apiRooms";
 
 import Col from "../../ui/Col";
 import Button from "../../ui/Button";
 import Error from "./Error";
 import RowForm from "./RowForm";
-import toast from "react-hot-toast";
 
-export default function CreateRoomForm({ id, showForm, onCloseViewBox }) {
-    const { register, handleSubmit, formState } = useForm();
-    const { errors } = formState;
-    const query = useQueryClient();
+import useAddNewRoom from "./hooks/useAddNewRoom";
 
-    const { mutate: addNewRoom, isLoading: isCreating } = useMutation({
-        mutationFn: addNewRoomApi,
-        onSuccess: () => {
-            showForm();
-            query.invalidateQueries({ queryKey: ["rooms"] });
-            toast.success("Room added succefully");
-        },
+export default function CreateRoomForm({
+    id: idToEdit,
+    room,
+
+    onCloseViewBox,
+}) {
+    const isEditing = Boolean(idToEdit);
+    const roomData = isEditing ? { ...room } : {};
+    const { addNewRoom, isCreating } = useAddNewRoom();
+
+    const { register, handleSubmit, formState } = useForm({
+        defaultValues: roomData,
     });
+    const { errors } = formState;
+
     function onSubmit(data) {
-        addNewRoom(data);
+        if (isEditing) {
+            console.log(data);
+        } else addNewRoom(data);
     }
 
     return (
@@ -32,7 +35,7 @@ export default function CreateRoomForm({ id, showForm, onCloseViewBox }) {
                 <Col classes="gap-2">
                     <label htmlFor="roomNumber">Room Number</label>
                     <input
-                        {...register("code", {
+                        {...register("roomNumber", {
                             validate: validateRoomNumber,
                         })}
                         disabled={isCreating}
@@ -85,7 +88,9 @@ export default function CreateRoomForm({ id, showForm, onCloseViewBox }) {
                     >
                         Cancel
                     </Button>
-                    <Button disabled={isCreating}>Save</Button>
+                    <Button disabled={isCreating}>
+                        {isEditing ? "Edit" : "Save"}
+                    </Button>
                 </div>
             </Col>
         </form>
