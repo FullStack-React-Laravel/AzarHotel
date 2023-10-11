@@ -17,7 +17,7 @@ class RoomFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => fake()->unique()->regexify($string = '[A-Z][0-9]{1,3}'),
+            'room_number' => fake()->unique()->regexify($string = '[A-Z][0-9]{3}'),
             'type' => fake()->randomElement(['King', 'Queen', 'Super', 'Gold', 'Silver', 'Diamond', 'Emerald']),
             'price' => fake()->numberBetween(100, 1000),
             'capacity' => fake()->numberBetween(1, 10)

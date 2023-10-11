@@ -12,7 +12,7 @@ class Room extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'code',
+        'room_number',
         'type',
         'price',
         'capacity'

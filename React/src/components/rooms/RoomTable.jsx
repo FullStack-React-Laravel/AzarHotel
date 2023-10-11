@@ -15,7 +15,7 @@ export default function RoomTable({ rooms }) {
             </Table.Header>
             <Table.Body
                 data={rooms}
-                render={(room) => <RoomRow key={room.code} room={room} />}
+                render={(room) => <RoomRow key={room.room_number} room={room} />}
             />
         </Table>
     );

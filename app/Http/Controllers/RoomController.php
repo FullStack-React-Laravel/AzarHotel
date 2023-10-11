@@ -43,12 +43,14 @@ class RoomController extends Controller
     {
         $data = $request->validated();
 
-        $room->code = $data->code;
-        $room->type = $data->type;
-        $room->price = $data->price;
-        $room->capacity = $data->capacity;
+        $room->room_number = $data['room_number'];
+        $room->type = $data['type'];
+        $room->price = $data['price'];
+        $room->capacity = $data['capacity'];
 
         $room->save();
+
+        return ["status" => "success"];
     }
 
     /**

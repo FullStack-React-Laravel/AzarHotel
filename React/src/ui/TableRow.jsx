@@ -9,13 +9,13 @@ import CreateRoomForm from "../components/rooms/CreateRoomForm";
 import useDeleteRoom from "../components/rooms/hooks/useDeleteRoom";
 
 export default function RoomRow({ room }) {
-    const { id: roomId, code, type, capacity, price } = room;
+    const { id: roomId, room_number, type, capacity, price } = room;
     const { deletingRoom, isDeleting } = useDeleteRoom();
 
     return (
         <Table.Row>
             <TableCell></TableCell>
-            <TableCell>{code}</TableCell>
+            <TableCell>{room_number}</TableCell>
             <TableCell>{type}</TableCell>
             <TableCell>{capacity}</TableCell>
             <TableCell>{price}&pound;</TableCell>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Room;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRoomRequest extends FormRequest
 {
@@ -22,7 +24,14 @@ class UpdateRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'room_number' => [
+                'required',
+                'regex:/[A-Z][0-9]{3}/',
+                Rule::unique('rooms')->ignore($this->room)
+            ],
+            'type' => 'required',
+            'price' => 'required|numeric|min:0',
+            'capacity' => 'required|integer|min:0'
         ];
     }
 }

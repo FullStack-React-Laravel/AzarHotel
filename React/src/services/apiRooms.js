@@ -13,77 +13,60 @@
  * - data get => room('id','code','type','price','capacity')
  * - data set => room('code','type','price','capacity')
  */
+import FetchException from '../exceptions/FetchException'
 
+const METHOD = {
+    GET: 'GET',         // get data with actions (index, show)
+    POST: 'POST',       // send data with actions (store)
+    PUT: 'PUT',         // update data with actions (update)  -- Edit to data
+    PATCH: 'PATCH',     // update data with actions (update)  -- Delete old data and insert new
+    DELETE: 'DELETE',   // delete data with action (destroy)
+};
+
+const APP_LINK = 'http://localhost:8000/api/rooms';
+
+export async function customFetch(uri, method = METHOD.GET, data = null) {
+    const init = {
+        method: method,
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            // // "X-CSRF-Token": document.querySelector('input[name=_token]').value
+        },
+    }
+
+    if (method != METHOD.GET && data) init['body'] = JSON.stringify(data);
+
+    const response = await fetch(uri, init);
+    const promise = await response.json();
+
+    if (!response.ok) FetchException.throw(promise);
+
+    return promise;
+}
+
+// TODO : create class name room control to all fetches and named it with naming convention like comment or stay with that approach, It's good enough.
+//* index
 export async function getRooms() {
-    const res = await fetch("http://localhost:8000/api/rooms", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            // "X-CSRF-Token": document.querySelector('input[name=_token]').value
-        },
-    });
-
-    if (!res.ok) {
-        throw new Error(`cant get rooms`);
-    }
-    const data = await res.json();
-
-    return data;
+    return customFetch(APP_LINK);
 }
 
+//* show
+export async function getRoom(roomId) {
+    return customFetch(`${APP_LINK}/${roomId}`);
+}
+
+//* store
+export async function addNewRoomApi(room) {
+    return customFetch(APP_LINK, METHOD.POST, room);
+}
+
+//* update
+export async function editRoomApi(roomId, room) {
+    return customFetch(`${APP_LINK}/${roomId}`, METHOD.PATCH, room);
+}
+
+//* destroy
 export async function deletingRoomApi(roomId) {
-    const res = await fetch(`http://localhost:8000/api/rooms/${roomId}`, {
-        method: "DELETE",
-    });
-
-    if (!res.ok) {
-        throw new Error(`cant delete room`);
-    }
-    const data = await res.json();
-
-    return data;
-}
-
-export async function addNewRoomApi(newRoom) {
-    console.log(JSON.stringify(newRoom));
-    const res = await fetch(`http://localhost:8000/api/rooms`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-
-            // "X-CSRF-Token": document.querySelector('input[name=_token]').value
-        },
-        body: JSON.stringify(newRoom),
-    });
-
-    if (!res.ok) {
-        throw new Error(`cant Add new room`);
-    }
-    const data = await res.json();
-
-    return data;
-}
-
-export async function editRoomApi(id, room) {
-    console.log(JSON.stringify(room), id);
-    return;
-    // const res = await fetch(`http://localhost:8000/api/rooms`, {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         Accept: "application/json",
-
-    //         // "X-CSRF-Token": document.querySelector('input[name=_token]').value
-    //     },
-    //     body: JSON.stringify(newRoom),
-    // });
-
-    // if (!res.ok) {
-    //     throw new Error(`cant Add new room`);
-    // }
-    // const data = await res.json();
-
-    // return data;
+    return customFetch(`${APP_LINK}/${roomId}`, METHOD.DELETE);
 }

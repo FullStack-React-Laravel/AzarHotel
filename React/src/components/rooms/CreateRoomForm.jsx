@@ -22,7 +22,7 @@ export default function CreateRoomForm({
         defaultValues: roomData,
     });
     const { errors } = formState;
-
+    console.log(errors);
     function onSubmit(data) {
         if (isEditing) {
             console.log(data);
@@ -32,21 +32,33 @@ export default function CreateRoomForm({
     return (
         <form className="px-12 pb-8 pt-12" onSubmit={handleSubmit(onSubmit)}>
             <Col classes="gap-6">
-                <Col classes="gap-2">
-                    <label htmlFor="roomNumber">Room Number</label>
+                {/* <Col classes="gap-2">
+                    <label htmlFor="room_number">Room Number</label>
                     <input
-                        {...register("roomNumber", {
+                        {...register("room_number", {
                             validate: validateRoomNumber,
                         })}
                         disabled={isCreating}
                         className="input"
-                        id="roomNumber"
+                        id="room_number"
                         type="text"
                     />
                     {errors?.code?.message && (
                         <Error>{errors?.code?.message}</Error>
                     )}
-                </Col>
+                </Col> */}
+                <RowForm error={errors?.room_number?.message} name="room_number">
+                    <input
+                        {...register("room_number", {
+                            required: "this field is required",
+                            validate: validateRoomNumber,
+                        })}
+                        disabled={isCreating}
+                        className="input"
+                        id="room_number"
+                        type="text"
+                    />
+                </RowForm>
                 <RowForm error={errors?.type?.message} name="type">
                     <input
                         {...register("type", {
