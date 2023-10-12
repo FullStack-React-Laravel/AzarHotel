@@ -1,9 +1,8 @@
-import toast from "react-hot-toast";
 import Button from "../../ui/Button";
 import ViewBox from "../../ui/ViewBox";
 import CreateRoomForm from "./CreateRoomForm";
 
-export default function AddRoom() {
+export default function AddRoomButton() {
     return (
         <ViewBox>
             <ViewBox.Open open="addRoom">

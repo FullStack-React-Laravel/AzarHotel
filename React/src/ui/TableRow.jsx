@@ -1,24 +1,29 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { useDeleteRoom } from "../hooks/roomsHooks";
+import EditRoomForm from "../components/rooms/EditRoomForm";
+
+// ----------------------------
 import TableCell from "./TableCell";
 import Button from "./Button";
 import Table from "./Table";
 import ViewBox from "./ViewBox";
 import DeletingConfirm from "./DeletingConfirm";
-import CreateRoomForm from "../components/rooms/CreateRoomForm";
-import useDeleteRoom from "../components/rooms/hooks/useDeleteRoom";
 
 export default function RoomRow({ room }) {
-    let { id: roomId, room_number, type, capacity, price } = room;
+    // let { id: roomId, room_number, type, capacity, price } = room;
     const { deletingRoom, isDeleting } = useDeleteRoom();
 
     return (
         <Table.Row>
-            <TableCell></TableCell>
-            <TableCell>{room_number}</TableCell>
-            <TableCell>{type}</TableCell>
-            <TableCell>{capacity}</TableCell>
-            <TableCell>{price}&pound;</TableCell>
+            {Object.keys(room)
+                .filter((key) => key !== "id")
+                .map((key) => (
+                    <TableCell>
+                        {room[key] + (key === "price" ? "£" : "")}
+                    </TableCell>
+                ))}
+
             <TableCell classes=" flex gap-8 text-xl">
                 <ViewBox>
                     {/* ---------- View Box Popop To Edit ---------- */}
@@ -28,7 +33,7 @@ export default function RoomRow({ room }) {
                         </Button>
                     </ViewBox.Open>
                     <ViewBox.Window width="w-[450px]" window="edit">
-                        <CreateRoomForm id={roomId} room={room} />
+                        <EditRoomForm id={room.id} room={room} />
                     </ViewBox.Window>
                     {/* ---------------------------------------- */}
 
@@ -41,7 +46,7 @@ export default function RoomRow({ room }) {
                     <ViewBox.Window width="w-[400px]" window="delete">
                         <DeletingConfirm
                             isDeleting={isDeleting}
-                            onDelete={() => deletingRoom(roomId)}
+                            onDelete={() => deletingRoom(room.id)}
                         />
                     </ViewBox.Window>
                     {/* ---------------------------------------- */}

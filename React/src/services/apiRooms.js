@@ -13,7 +13,8 @@
  * - data get => room('id','code','type','price','capacity')
  * - data set => room('code','type','price','capacity')
  */
-import FetchException from "../exceptions/FetchException";
+
+// import FetchException from "../exceptions/FetchException";
 
 const METHOD = {
     GET: "GET", // get data with actions (index, show)
@@ -25,7 +26,7 @@ const METHOD = {
 
 const APP_LINK = "http://localhost:8000/api/rooms";
 
-export async function customFetch(uri, method = METHOD.GET, data = null) {
+export async function customFetch(url, method = METHOD.GET, data = null) {
     const init = {
         method: method,
         headers: {
@@ -37,17 +38,19 @@ export async function customFetch(uri, method = METHOD.GET, data = null) {
 
     if (method !== METHOD.GET && data) init["body"] = JSON.stringify(data);
 
-    const response = await fetch(uri, init);
-    const promise = await response.json();
-    console.log(promise);
-    if (!response.ok) FetchException.throw(promise);
+    const res = await fetch(url, init);
+    const dataFromRes = await res.json();
 
-    return promise;
+    // if (!res.ok) FetchException.throw(dataFromRes);
+    if (!res.ok) {
+        throw new Error(dataFromRes.message);
+    }
+    return dataFromRes;
 }
 
 // TODO : create class name room control to all fetches and named it with naming convention like comment or stay with that approach, It's good enough.
 //* index
-export async function getRooms() {
+export async function getRoomsApi() {
     return customFetch(APP_LINK);
 }
 
@@ -62,8 +65,9 @@ export async function addNewRoomApi(room) {
 }
 
 //* update
-export async function editRoomApi(roomId, room) {
-    return customFetch(`${APP_LINK}/${roomId}`, METHOD.PATCH, room);
+export async function editRoomApi(room) {
+    console.log(room);
+    return customFetch(`${APP_LINK}/${room.id}`, METHOD.PATCH, room);
 }
 
 //* destroy

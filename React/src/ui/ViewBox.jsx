@@ -1,6 +1,6 @@
 import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
-import useCloseViewBox from "../components/rooms/hooks/useCloseViewBox";
+import useCloseViewBox from "../hooks/useCloseViewBox";
 
 /* This Is Reuseable Compound Componets For VieBox Popop */
 

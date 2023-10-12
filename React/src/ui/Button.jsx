@@ -9,7 +9,10 @@ function Button({
         "inline-block text-base rounded-md  uppercase text-white transition-colors duration-300  focus:outline-none focus:ring focus:ring-offset-1 px-6 py-2";
     const styles = {
         primary:
-            base + " focus:ring-indigo-400 hover:bg-indigo-500 bg-indigo-600 ",
+            base +
+            ` focus:ring-indigo-400  ${
+                disabled ? "bg-indigo-200" : "bg-indigo-600 hover:bg-indigo-500"
+            }  `,
         secondary:
             "px-6 py-2 inline-block text-base border border-gray-500 hover:border-indigo-500 rounded-md bg-transparent uppercase text-gray-500 transition-colors duration-300 hover:text-indigo-500 focus:outline-none focus:ring focus:ring-indigo-400 focus:ring-offset-1",
         none: "",
@@ -18,7 +21,6 @@ function Button({
     if (onClick) {
         return (
             <button
-                style={disabled ? { background: "#ff000063" } : null}
                 type={type}
                 onClick={onClick}
                 disabled={disabled}
@@ -29,7 +31,11 @@ function Button({
         );
     }
     return (
-        <button type={type} className={styles[typeOfButton]}>
+        <button
+            disabled={disabled}
+            type={type}
+            className={styles[typeOfButton]}
+        >
             {children}
         </button>
     );

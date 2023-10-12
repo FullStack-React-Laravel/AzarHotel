@@ -20,7 +20,7 @@ function Header({ children }) {
     return (
         <div
             role="row"
-            className={`${columns} grid  rounded-md bg-indigo-600 font-bold tracking-wider text-white`}
+            className={`${columns} grid  rounded-md bg-indigo-600 px-8 font-bold tracking-wider text-white`}
         >
             {children}
         </div>
@@ -29,7 +29,10 @@ function Header({ children }) {
 function Row({ children }) {
     const { columns } = useContext(tableContext);
     return (
-        <div rol="row" className={`border-b-gray-10 grid ${columns} border-b `}>
+        <div
+            rol="row"
+            className={`border-b-gray-10 grid ${columns} border-b px-8`}
+        >
             {children}
         </div>
     );

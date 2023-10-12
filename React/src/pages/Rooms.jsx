@@ -1,11 +1,11 @@
-import { useGetAllRooms } from "../components/rooms/hooks/useGetAllRooms";
-
 import Row from "../ui/Row";
 
 import Col from "../ui/Col";
 import Spinner from "../ui/Spinner";
-import AddRoom from "../components/rooms/AddRoom";
+
 import RoomTable from "../components/rooms/RoomTable";
+import { useGetAllRooms } from "../hooks/roomsHooks";
+import AddRoomButton from "../components/rooms/AddRoomButton";
 
 export default function Rooms() {
     const { rooms, isError, isLoading, error } = useGetAllRooms();
@@ -20,7 +20,7 @@ export default function Rooms() {
                 <>
                     <Row>
                         <h1 className="text-4xl text-gray-700">All Rooms</h1>
-                        <AddRoom />
+                        <AddRoomButton />
                     </Row>
                     <RoomTable rooms={rooms} />
                 </>

@@ -1,5 +1,4 @@
 function common(v) {
-    console.log(v);
     if (v === "") return "please this field is required";
     else if (v.startsWith(" ")) return "please remove space from the begining";
     else if (v.endsWith(" ")) return "please remove space from the end";

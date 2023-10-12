@@ -1,4 +1,4 @@
-import { useAddNewRoom } from "../../hooks/roomsHooks";
+import { useEditRoom } from "../../hooks/roomsHooks";
 
 import { useForm } from "react-hook-form";
 import {
@@ -13,12 +13,21 @@ import Col from "../../ui/Col";
 import Button from "../../ui/Button";
 import RowForm from "./RowForm";
 
-export default function CreateRoomForm({ attr, onCloseViewBox }) {
-    const { addNewRoom, isCreating } = useAddNewRoom(onCloseViewBox);
-    const { register, handleSubmit, formState } = useForm();
+export default function EditRoomForm({ room, onCloseViewBox }) {
+    const { editRoom, isEditing } = useEditRoom(onCloseViewBox);
+
+    // check if room exist to edit and if exist convert number to string to avoid error in validate
+
+    room.price = room.price.toString();
+    room.capacity = room.capacity.toString();
+
+    const { register, handleSubmit, formState } = useForm({
+        defaultValues: room,
+    });
     const { errors } = formState;
+
     function onSubmit(data) {
-        addNewRoom(data);
+        editRoom(data);
     }
 
     return (
@@ -32,7 +41,7 @@ export default function CreateRoomForm({ attr, onCloseViewBox }) {
                         {...register("room_number", {
                             validate: validateNumber,
                         })}
-                        disabled={isCreating}
+                        disabled={isEditing}
                         className="input"
                         id="room_number"
                     />
@@ -40,7 +49,7 @@ export default function CreateRoomForm({ attr, onCloseViewBox }) {
                 <RowForm error={errors?.type?.message} name="type">
                     <input
                         {...register("type", { validate: validateType })}
-                        disabled={isCreating}
+                        disabled={isEditing}
                         className="input"
                         id="type"
                     />
@@ -50,7 +59,7 @@ export default function CreateRoomForm({ attr, onCloseViewBox }) {
                         {...register("capacity", {
                             validate: validateCapacity,
                         })}
-                        disabled={isCreating}
+                        disabled={isEditing}
                         className="input"
                         id="capacity"
                     />
@@ -60,7 +69,7 @@ export default function CreateRoomForm({ attr, onCloseViewBox }) {
                         {...register("price", {
                             validate: validatePrice,
                         })}
-                        disabled={isCreating}
+                        disabled={isEditing}
                         className="input"
                         id="price"
                     />
@@ -73,7 +82,7 @@ export default function CreateRoomForm({ attr, onCloseViewBox }) {
                     >
                         Cancel
                     </Button>
-                    <Button disabled={isCreating}>Save</Button>
+                    <Button disabled={isEditing}>Edit</Button>
                 </div>
             </Col>
         </form>
