@@ -13,17 +13,17 @@
  * - data get => room('id','code','type','price','capacity')
  * - data set => room('code','type','price','capacity')
  */
-import FetchException from '../exceptions/FetchException'
+import FetchException from "../exceptions/FetchException";
 
 const METHOD = {
-    GET: 'GET',         // get data with actions (index, show)
-    POST: 'POST',       // send data with actions (store)
-    PUT: 'PUT',         // update data with actions (update)  -- Edit to data
-    PATCH: 'PATCH',     // update data with actions (update)  -- Delete old data and insert new
-    DELETE: 'DELETE',   // delete data with action (destroy)
+    GET: "GET", // get data with actions (index, show)
+    POST: "POST", // send data with actions (store)
+    PUT: "PUT", // update data with actions (update)  -- Edit to data
+    PATCH: "PATCH", // update data with actions (update)  -- Delete old data and insert new
+    DELETE: "DELETE", // delete data with action (destroy)
 };
 
-const APP_LINK = 'http://localhost:8000/api/rooms';
+const APP_LINK = "http://localhost:8000/api/rooms";
 
 export async function customFetch(uri, method = METHOD.GET, data = null) {
     const init = {
@@ -33,13 +33,13 @@ export async function customFetch(uri, method = METHOD.GET, data = null) {
             Accept: "application/json",
             // // "X-CSRF-Token": document.querySelector('input[name=_token]').value
         },
-    }
+    };
 
-    if (method != METHOD.GET && data) init['body'] = JSON.stringify(data);
+    if (method !== METHOD.GET && data) init["body"] = JSON.stringify(data);
 
     const response = await fetch(uri, init);
     const promise = await response.json();
-
+    console.log(promise);
     if (!response.ok) FetchException.throw(promise);
 
     return promise;

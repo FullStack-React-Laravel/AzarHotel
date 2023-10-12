@@ -7,7 +7,7 @@ export default function RoomTable({ rooms }) {
         <Table columns="grid-cols-[10rem_1fr_1fr_1fr_1fr_1fr]">
             <Table.Header>
                 <TableCell></TableCell>
-                <TableCell>Room_N</TableCell>
+                <TableCell>Room Number</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Capacity</TableCell>
                 <TableCell>Price</TableCell>
@@ -15,7 +15,9 @@ export default function RoomTable({ rooms }) {
             </Table.Header>
             <Table.Body
                 data={rooms}
-                render={(room) => <RoomRow key={room.room_number} room={room} />}
+                render={(room) => (
+                    <RoomRow key={room.room_number} room={room} />
+                )}
             />
         </Table>
     );

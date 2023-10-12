@@ -9,7 +9,7 @@ import CreateRoomForm from "../components/rooms/CreateRoomForm";
 import useDeleteRoom from "../components/rooms/hooks/useDeleteRoom";
 
 export default function RoomRow({ room }) {
-    const { id: roomId, room_number, type, capacity, price } = room;
+    let { id: roomId, room_number, type, capacity, price } = room;
     const { deletingRoom, isDeleting } = useDeleteRoom();
 
     return (
