@@ -4,32 +4,33 @@ import Col from "../ui/Col";
 import Spinner from "../ui/Spinner";
 
 import RoomTable from "../components/rooms/RoomTable";
-import { useGetAllRooms } from "../hooks/roomsHooks";
+
 import AddRoomButton from "../components/rooms/AddRoomButton";
 import Filter from "../ui/Filter";
+import { useGetRooms } from "../hooks/useGetRooms";
 
 const options = [
-    { type: "filter", value: "all" },
-    { type: "filter", value: "silver" },
-    { type: "filter", value: "gold" },
-    { type: "filter", value: "diamond" },
+    { label: "Silver", value: "silver" },
+    { label: "Gold", value: "gold" },
+    { label: "Diamond", value: "diamond" },
 ];
 
 export default function Rooms() {
-    const { rooms, isError, isLoading, error } = useGetAllRooms();
+    const { rooms, isError, isLoading, error } = useGetRooms();
     if (isError) return <p>{error.message}</p>;
 
     return (
         <Col>
+            <Row classes=" mb-16">
+                <h1 className="text-4xl text-gray-700">All Rooms</h1>
+                {isLoading ? null : <AddRoomButton />}
+            </Row>
+            <Filter options={options} />
+
             {isLoading ? (
                 <Spinner text="loading rooms..." />
             ) : (
                 <>
-                    <Row classes=" mb-12">
-                        <h1 className="text-4xl text-gray-700">All Rooms</h1>
-                        <AddRoomButton />
-                    </Row>
-                    <Filter options={options} />
                     <RoomTable rooms={rooms} />
                 </>
             )}

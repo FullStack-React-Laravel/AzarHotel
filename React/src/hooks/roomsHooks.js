@@ -1,28 +1,13 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
     addNewRoomApi,
     deletingRoomApi,
     editRoomApi,
-    getRoomsApi,
 } from "../services/apiRooms";
 import toast from "react-hot-toast";
+
 //------------------------------------------------------
-export function useGetAllRooms() {
-    const {
-        data: rooms,
-        isLoading,
-        isError,
-        error,
-    } = useQuery({
-        queryKey: ["rooms"],
-        queryFn: getRoomsApi,
-        retry: false,
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-    return { rooms, isLoading, isError, error };
-}
+
 //------------------------------------------------------
 
 export function useAddNewRoom(onCloseViewBox, idToEdit, room) {
