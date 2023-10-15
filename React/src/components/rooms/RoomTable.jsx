@@ -3,9 +3,10 @@ import TableCell from "../../ui/TableCell";
 import RoomRow from "../../ui/TableRow";
 
 export default function RoomTable({ rooms }) {
-    const headers = Object.keys(rooms.at(0)).filter(
+    // TODO : Fix this error
+    const headers = rooms.length ? Object.keys(rooms.at(0)).filter(
         (header) => header !== "id",
-    );
+    ) : [];
 
     const finalHeaders = headers.map((header) => header.split("_").join(" "));
 

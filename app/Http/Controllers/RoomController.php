@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use App\Models\Room;
+use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Room::orderBy('id', 'DESC')->get();
+        return Room::orderBy('id', 'DESC')
+            ->when(
+                $request->has('types') && $request->types != 'all',
+                fn ($builder) => $builder->whereIn('type', explode('-', $request->types))
+            )->get();
     }
 
     /**

@@ -50,8 +50,8 @@ export async function customFetch(url, method = METHOD.GET, data = null) {
 
 // TODO : create class name room control to all fetches and named it with naming convention like comment or stay with that approach, It's good enough.
 //* index
-export async function getRoomsApi(filterValue) {
-    return customFetch(APP_LINK);
+export async function getRoomsApi(filterValue = null) {
+    return customFetch(`${APP_LINK}?${filterValue}`);
 }
 
 //* show

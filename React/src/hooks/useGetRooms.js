@@ -5,7 +5,7 @@ import { getRoomsApi } from "../services/apiRooms";
 export function useGetRooms() {
     const [searchParams] = useSearchParams();
 
-    const filterValue = searchParams.get("type") || "all";
+    const filterValue = `types=${searchParams.get("type") || "all"}`;
 
     const {
         data: rooms,
