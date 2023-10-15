@@ -10,7 +10,7 @@ export default function RoomTable({ rooms }) {
     const finalHeaders = headers.map((header) => header.split("_").join(" "));
 
     return (
-        <Table columns="grid-cols-[1fr_1fr_1fr_1fr_1fr]">
+        <Table columns="grid-cols-[1fr_1fr_1fr_1fr_100px]">
             <Table.Header>
                 {finalHeaders.map((header) => {
                     return (
@@ -19,7 +19,6 @@ export default function RoomTable({ rooms }) {
                         </TableCell>
                     );
                 })}
-                <div></div>
             </Table.Header>
             <Table.Body
                 data={rooms}

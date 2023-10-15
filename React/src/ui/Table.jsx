@@ -20,7 +20,7 @@ function Header({ children }) {
     return (
         <div
             role="row"
-            className={`${columns} grid  rounded-md bg-indigo-600 px-8 font-bold tracking-wider text-white`}
+            className={`${columns} text-main  grid rounded-md bg-gray-200 px-8 font-bold tracking-wider`}
         >
             {children}
         </div>

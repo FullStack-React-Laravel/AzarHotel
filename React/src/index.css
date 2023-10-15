@@ -49,9 +49,10 @@
 }
 
 a.active {
-    color: #1f2937;
-    background: #f3f4f6;
+    color: white;
+    background: linear-gradient(to right, rgb(8 42 91) 20%, #0c1a38);
+    border-left: 4px solid;
 }
 a.active svg {
-    color: #4f46e5;
+    color: white;
 }

@@ -16,7 +16,7 @@ import RowForm from "./RowForm";
 export default function EditRoomForm({ room, onCloseViewBox }) {
     const { editRoom, isEditing } = useEditRoom(onCloseViewBox);
 
-    // check if room exist to edit and if exist convert number to string to avoid error in validate
+
 
     room.price = room.price.toString();
     room.capacity = room.capacity.toString();

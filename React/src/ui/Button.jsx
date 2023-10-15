@@ -11,7 +11,7 @@ function Button({
         primary:
             base +
             ` focus:ring-indigo-400  ${
-                disabled ? "bg-indigo-200" : "bg-indigo-600 hover:bg-indigo-500"
+                disabled ? "bg-indigo-200" : "bg-indigo-800 hover:bg-indigo-600"
             }  `,
         secondary:
             "px-6 py-2 inline-block text-base border border-gray-500 hover:border-indigo-500 rounded-md bg-transparent uppercase text-gray-500 transition-colors duration-300 hover:text-indigo-500 focus:outline-none focus:ring focus:ring-indigo-400 focus:ring-offset-1",
