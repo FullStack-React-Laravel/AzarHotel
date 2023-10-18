@@ -8,7 +8,7 @@ export default function Applayout() {
         <StyleAppLayout>
             <Sidebar />
             <Header />
-            <main className=" overflow-scroll bg-gray-100 p-6">
+            <main className=" relative overflow-scroll bg-gray-100 p-6">
                 <Outlet />
             </main>
         </StyleAppLayout>

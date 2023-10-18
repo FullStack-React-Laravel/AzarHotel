@@ -19,7 +19,8 @@ const ourStyle = {
         color: "white",
         borderRadius: "4px",
     }),
-    menuList: () => ({
+    menuList: (baseStyles) => ({
+        ...baseStyles,
         color: "#312e81",
     }),
     option: (styles, state) => ({
@@ -61,7 +62,7 @@ export default function Filter({ options }) {
     }
 
     return (
-        <div className=" mb-4 w-[340px] ">
+        <div className=" mb-4 grid w-[700px] grid-cols-2 justify-between gap-2 ">
             <Select
                 components={animatedComponents}
                 isDisabled={false}
@@ -69,7 +70,9 @@ export default function Filter({ options }) {
                 options={options}
                 isMulti={true}
                 styles={ourStyle}
+                minMenuHeight={5}
             />
+            <input placeholder="search..." className=" px-4" />
         </div>
     );
 }

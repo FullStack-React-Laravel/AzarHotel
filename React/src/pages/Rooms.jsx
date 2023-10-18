@@ -1,3 +1,5 @@
+import { BiError } from "react-icons/bi";
+
 import Row from "../ui/Row";
 
 import Col from "../ui/Col";
@@ -17,10 +19,11 @@ const options = [
 
 export default function Rooms() {
     const { rooms, isError, isLoading, error } = useGetRooms();
+
     if (isError) return <p>{error.message}</p>;
 
     return (
-        <Col>
+        <Col classes=" relative h-full">
             <Row classes=" mb-16">
                 <h1 className="text-4xl text-gray-700">All Rooms</h1>
                 {isLoading ? null : <AddRoomButton />}
@@ -28,12 +31,33 @@ export default function Rooms() {
             <Filter options={options} />
 
             {isLoading ? (
-                <Spinner text="loading rooms..." />
+                <Spinner text="loading rooms table..." />
             ) : (
                 <>
-                    <RoomTable rooms={rooms} />
+                    {!rooms.length ? (
+                        <div className=" flex h-full flex-col items-center justify-center text-3xl text-red-500">
+                            <BiError />
+                            No data in rooms table
+                        </div>
+                    ) : (
+                        <RoomTable rooms={rooms} />
+                    )}
                 </>
             )}
         </Col>
     );
 }
+
+// const [rooms, setRooms] = useState([]);
+// const [isLoading, setIsLoading] = useState(false);
+
+// useEffect(() => {
+//     async function getRoom() {
+//         setIsLoading(true);
+//         const res = await fetch("http://localhost:8000/api/rooms");
+//         const data = await res.json();
+//         setRooms(data);
+//         setIsLoading(false);
+//     }
+//     getRoom();
+// }, []);

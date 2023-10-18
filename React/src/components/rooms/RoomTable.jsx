@@ -1,23 +1,29 @@
+import Sort from "../../ui/Sort";
 import Table from "../../ui/Table";
 import TableCell from "../../ui/TableCell";
 import RoomRow from "../../ui/TableRow";
 
 export default function RoomTable({ rooms }) {
     // TODO : Fix this error
-    const headers = rooms.length ? Object.keys(rooms.at(0)).filter(
-        (header) => header !== "id",
-    ) : [];
 
-    const finalHeaders = headers.map((header) => header.split("_").join(" "));
+    // const headers = rooms.length
+    //     ? Object.keys(rooms.at(0)).filter((header) => header !== "id")
+    //     : [];
+
+    const headers = Object.keys(rooms.at(0)).filter(
+        (header) => header !== "id",
+    );
 
     return (
         <Table columns="grid-cols-[1fr_1fr_1fr_1fr_100px]">
             <Table.Header>
-                {finalHeaders.map((header) => {
+                {headers.map((header) => {
                     return (
-                        <TableCell classes=" capitalize" key={header}>
-                            {header}
-                        </TableCell>
+                        <Sort sortBy={header} key={header}>
+                            <TableCell classes=" capitalize">
+                                {header.split("_").join(" ")}
+                            </TableCell>
+                        </Sort>
                     );
                 })}
             </Table.Header>

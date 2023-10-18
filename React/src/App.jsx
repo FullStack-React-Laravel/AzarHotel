@@ -26,6 +26,7 @@ function App() {
                         <Route path="home" element={<Home />} />
                         <Route path="rooms" element={<Rooms />} />
                         <Route path="bookings" element={<Bookings />} />
+                        <Route path="*" element={<p>Error</p>} />
                     </Route>
                 </Routes>
             </BrowserRouter>
