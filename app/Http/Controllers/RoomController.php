@@ -14,11 +14,11 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        return Room::orderBy('id', 'DESC')
-            ->when(
-                $request->has('types') && $request->types != 'all',
-                fn ($builder) => $builder->whereIn('type', explode('-', $request->types))
-            )->get();
+        //! TODO: when make paginate replace get() method to paginate() method
+        return Room::sortFilter($request->sort, $request->order)
+            ->when($request->has('types'), fn ($query) => $query->typesFilter($request->types))
+            ->when($request->has('search'), fn ($query) => $query->search($request->search))
+            ->/* paginate */get();
     }
 
     /**
