@@ -4,12 +4,6 @@ import TableCell from "../../ui/TableCell";
 import RoomRow from "../../ui/TableRow";
 
 export default function RoomTable({ rooms }) {
-    // TODO : Fix this error
-
-    // const headers = rooms.length
-    //     ? Object.keys(rooms.at(0)).filter((header) => header !== "id")
-    //     : [];
-
     const headers = Object.keys(rooms.at(0)).filter(
         (header) => header !== "id",
     );

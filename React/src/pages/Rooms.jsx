@@ -1,15 +1,12 @@
+import { useGetRooms } from "../hooks/useGetRooms";
+
 import { BiError } from "react-icons/bi";
-
 import Row from "../ui/Row";
-
 import Col from "../ui/Col";
 import Spinner from "../ui/Spinner";
-
 import RoomTable from "../components/rooms/RoomTable";
-
 import AddRoomButton from "../components/rooms/AddRoomButton";
 import Filter from "../ui/Filter";
-import { useGetRooms } from "../hooks/useGetRooms";
 
 const options = [
     { label: "Silver", value: "silver" },
