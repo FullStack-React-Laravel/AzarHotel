@@ -11,7 +11,6 @@ import ViewBox from "./ViewBox";
 import DeletingConfirm from "./DeletingConfirm";
 
 export default function RoomRow({ room }) {
-    // let { id: roomId, room_number, type, capacity, price } = room;
     const { deletingRoom, isDeleting } = useDeleteRoom();
 
     const tableCells = Object.keys(room)
