@@ -1,14 +1,14 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import { useDeleteRoom } from "../hooks/roomsHooks";
-import EditRoomForm from "../components/rooms/EditRoomForm";
+import { useDeleteRoom } from "../../hooks/roomsHooks";
+import EditRoomForm from "../../components/rooms/EditRoomForm";
 
 // ----------------------------
 import TableCell from "./TableCell";
-import Button from "./Button";
+import Button from "../Button";
 import Table from "./Table";
-import ViewBox from "./ViewBox";
-import DeletingConfirm from "./DeletingConfirm";
+import ViewBox from "../ViewBox";
+import DeletingConfirm from "../DeletingConfirm";
 
 export default function RoomRow({ room }) {
     const { deletingRoom, isDeleting } = useDeleteRoom();

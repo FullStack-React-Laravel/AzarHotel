@@ -1,7 +1,7 @@
 import Sort from "../../ui/Sort";
-import Table from "../../ui/Table";
-import TableCell from "../../ui/TableCell";
-import RoomRow from "../../ui/TableRow";
+import Table from "../../ui/table/Table";
+import TableCell from "../../ui/table/TableCell";
+import RoomRow from "../../ui/table/TableRow";
 
 export default function RoomTable({ rooms }) {
     const headers = Object.keys(rooms.at(0)).filter(
