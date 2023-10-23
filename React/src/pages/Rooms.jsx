@@ -7,6 +7,7 @@ import Spinner from "../ui/Spinner";
 import RoomTable from "../components/rooms/RoomTable";
 import AddRoomButton from "../components/rooms/AddRoomButton";
 import Filter from "../ui/Filter";
+import Search from "../ui/Search";
 
 const options = [
     { label: "Silver", value: "silver" },
@@ -21,11 +22,14 @@ export default function Rooms() {
 
     return (
         <Col classes=" relative h-full">
-            <Row classes=" mb-16">
+            <Row classes=" mb-16 justify-between">
                 <h1 className="text-4xl text-gray-700">All Rooms</h1>
                 {isLoading ? null : <AddRoomButton />}
             </Row>
-            <Filter options={options} />
+            <Row classes=" w-[700px] mb-4 gap-4">
+                <Filter options={options} />
+                <Search />
+            </Row>
 
             {isLoading ? (
                 <Spinner text="loading rooms table..." />

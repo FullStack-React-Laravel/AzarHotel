@@ -1,7 +1,3 @@
-export default function Row({ children, classes }) {
-    return (
-        <div className={`flex items-center justify-between ${classes}`}>
-            {children}
-        </div>
-    );
+export default function Row({ children, classes = "" }) {
+    return <div className={`flex items-center ${classes}`}>{children}</div>;
 }

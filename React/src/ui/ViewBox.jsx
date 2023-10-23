@@ -1,7 +1,7 @@
 import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import useCloseViewBox from "../hooks/useCloseViewBox";
-
+import { LiaTimesSolid } from "react-icons/lia";
 /* This Is Reuseable Compound Componets For VieBox Popop */
 
 // create context to manage state close & open in ViewBox components
@@ -27,7 +27,7 @@ function Window({ children, width, window }) {
     if (openName !== window) return null;
 
     return createPortal(
-        <div className="fixed left-0 top-0  h-full w-full overflow-scroll bg-indigo-950/30 py-10 backdrop-blur-sm">
+        <div className="fixed left-0 top-0 z-50  h-full w-full overflow-scroll bg-indigo-950/30 py-10 backdrop-blur-sm">
             <div
                 ref={ref}
                 id="view-box"
@@ -37,9 +37,9 @@ function Window({ children, width, window }) {
             >
                 <button
                     onClick={() => setOpenName("")}
-                    className=" absolute right-4 top-4 rounded-md px-2 text-3xl text-gray-600 transition-all duration-300 hover:bg-gray-100"
+                    className="  absolute right-4 top-4 rounded-md px-2 py-2 text-xl text-gray-600 transition-all duration-300 hover:bg-gray-100"
                 >
-                    &times;
+                    <LiaTimesSolid />
                 </button>
                 {cloneElement(children, {
                     onCloseViewBox: () => setOpenName(""),

@@ -1,5 +1,3 @@
-import { useEditRoom } from "../../hooks/roomsHooks";
-
 import { useForm } from "react-hook-form";
 import {
     validateCapacity,
@@ -12,12 +10,11 @@ import {
 import Col from "../../ui/Col";
 import Button from "../../ui/Button";
 import RowForm from "./RowForm";
+import { useEditRoom } from "../../hooks/useEditRoom";
 
 export default function EditRoomForm({ room, onCloseViewBox }) {
     const { editRoom, isEditing } = useEditRoom(onCloseViewBox);
-
-
-
+    console.log(isEditing);
     room.price = room.price.toString();
     room.capacity = room.capacity.toString();
 

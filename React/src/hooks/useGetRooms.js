@@ -11,14 +11,17 @@ export function useGetRooms() {
     const sortBy = searchParams.get("sort") || "id";
     const order = searchParams.get("order") || "desc";
 
+    // Search
+    const search = searchParams.get("search") || "";
+
     const {
         data: rooms,
         isLoading,
         isError,
         error,
     } = useQuery({
-        queryKey: ["rooms", filterValue, sortBy, order],
-        queryFn: () => getRoomsApi(filterValue, sortBy, order),
+        queryKey: ["rooms", filterValue, sortBy, order, search],
+        queryFn: () => getRoomsApi(filterValue, sortBy, order, search),
         retry: false,
         onError: (error) => {
             console.log(error);

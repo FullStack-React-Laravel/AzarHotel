@@ -1,9 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-    addNewRoomApi,
-    deletingRoomApi,
-    editRoomApi,
-} from "../services/apiRooms";
+import { addNewRoomApi, deletingRoomApi } from "../services/apiRooms";
 import toast from "react-hot-toast";
 
 //------------------------------------------------------
@@ -28,24 +24,6 @@ export function useAddNewRoom(onCloseViewBox, idToEdit, room) {
     return { addNewRoom, isCreating };
 }
 
-export function useEditRoom(onCloseViewBox, room) {
-    const query = useQueryClient();
-
-    const { mutate: editRoom, isLoading: idEditing } = useMutation({
-        mutationFn: editRoomApi,
-        onSuccess: () => {
-            query.invalidateQueries({ queryKey: ["rooms"] });
-            onCloseViewBox?.();
-            toast.success("Room Edited succefully");
-        },
-
-        onError: (err) => {
-            toast.error(err.message);
-        },
-    });
-
-    return { editRoom, idEditing };
-}
 //------------------------------------------------------
 
 export function useDeleteRoom() {
