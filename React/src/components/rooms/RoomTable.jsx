@@ -1,9 +1,10 @@
 import Sort from "../../ui/Sort";
+import Pagination from "../../ui/table/Pagination";
 import Table from "../../ui/table/Table";
 import TableCell from "../../ui/table/TableCell";
 import RoomRow from "../../ui/table/TableRow";
 
-export default function RoomTable({ rooms }) {
+export default function RoomTable({ data, rooms }) {
     const headers = Object.keys(rooms.at(0)).filter(
         (header) => header !== "id",
     );
@@ -27,6 +28,9 @@ export default function RoomTable({ rooms }) {
                     <RoomRow key={room.room_number} room={room} />
                 )}
             />
+            <Table.Footer>
+                <Pagination data={data} />
+            </Table.Footer>
         </Table>
     );
 }

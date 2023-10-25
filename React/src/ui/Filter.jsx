@@ -57,8 +57,18 @@ export default function Filter({ options }) {
             currentValue += `${option.value}${
                 index === options.length - 1 ? "" : "-"
             }`;
-            searchParams.set("type", currentValue);
         });
+
+        // -------------------------------
+
+        if (!currentValue) {
+            searchParams.delete("type");
+            searchParams.delete("page");
+        } else if (currentValue !== searchParams.get("type")) {
+            searchParams.set("page", 1);
+            searchParams.set("type", currentValue);
+        }
+
         setSearchParams(searchParams);
     }
 

@@ -18,7 +18,7 @@ class RoomController extends Controller
         return Room::sortFilter($request->sort, $request->order)
             ->when($request->has('types'), fn ($query) => $query->typesFilter($request->types))
             ->when($request->has('search'), fn ($query) => $query->search($request->search))
-            ->/* paginate */get();
+            ->paginate(10);
     }
 
     /**

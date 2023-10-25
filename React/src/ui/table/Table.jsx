@@ -7,7 +7,7 @@ function Table({ children, columns }) {
         <tableContext.Provider value={{ columns }}>
             <div
                 role="table"
-                className="rounded-xl border border-gray-100 bg-white"
+                className="rounded-xl border border-gray-100 bg-white pb-96"
             >
                 {children}
             </div>
@@ -20,7 +20,7 @@ function Header({ children }) {
     return (
         <div
             role="row"
-            className={`${columns} text-main  grid rounded-md bg-gray-200 px-8 font-bold tracking-wider`}
+            className={`${columns} grid  rounded-md bg-gray-200 px-8 font-bold tracking-wider text-main`}
         >
             {children}
         </div>
@@ -41,7 +41,17 @@ function Row({ children }) {
 function Body({ data, render }) {
     return <div>{data.map(render)}</div>;
 }
+
+function Footer({ children }) {
+    return (
+        <div className="rounded-md bg-gray-100 px-8 py-2  tracking-wider ">
+            {children}
+        </div>
+    );
+}
+
 Table.Header = Header;
 Table.Row = Row;
 Table.Body = Body;
+Table.Footer = Footer;
 export default Table;

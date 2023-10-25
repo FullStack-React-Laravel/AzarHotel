@@ -16,8 +16,9 @@ const options = [
 ];
 
 export default function Rooms() {
-    const { rooms, isError, isLoading, error } = useGetRooms();
+    const { data, isError, isLoading, error } = useGetRooms();
 
+    const rooms = data?.["data"];
     if (isError) return <p>{error.message}</p>;
 
     return (
@@ -41,24 +42,10 @@ export default function Rooms() {
                             No data in rooms table
                         </div>
                     ) : (
-                        <RoomTable rooms={rooms} />
+                        <RoomTable data={data} rooms={rooms} />
                     )}
                 </>
             )}
         </Col>
     );
 }
-
-// const [rooms, setRooms] = useState([]);
-// const [isLoading, setIsLoading] = useState(false);
-
-// useEffect(() => {
-//     async function getRoom() {
-//         setIsLoading(true);
-//         const res = await fetch("http://localhost:8000/api/rooms");
-//         const data = await res.json();
-//         setRooms(data);
-//         setIsLoading(false);
-//     }
-//     getRoom();
-// }, []);

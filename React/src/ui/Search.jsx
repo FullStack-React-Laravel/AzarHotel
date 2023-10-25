@@ -7,12 +7,20 @@ export default function Search() {
 
     useEffect(() => {
         const id = setTimeout(() => {
-            searchParams.set("search", value);
+            if (value !== searchParams.get("search") && value) {
+                searchParams.set("page", 1);
+                searchParams.set("search", value);
+            } else if (!value) {
+                searchParams.delete("page");
+                searchParams.delete("search");
+            }
+
             setSearchParams(searchParams);
         }, 500);
 
         return () => clearTimeout(id);
-    }, [value, searchParams, setSearchParams]);
+        // TODO ---------------------- FIX DEP ARRY ----------------------
+    }, [value]);
     return (
         <input
             onChange={(e) => setValue(e.target.value)}

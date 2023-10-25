@@ -10,22 +10,18 @@ export function useGetRooms() {
     // Sort
     const sortBy = searchParams.get("sort") || "id";
     const order = searchParams.get("order") || "desc";
-
     // Search
     const search = searchParams.get("search") || "";
+    // Pagination
+    const pag = searchParams.get("page") || 1;
 
-    const {
-        data: rooms,
-        isLoading,
-        isError,
-        error,
-    } = useQuery({
-        queryKey: ["rooms", filterValue, sortBy, order, search],
-        queryFn: () => getRoomsApi(filterValue, sortBy, order, search),
+    const { data, isLoading, isError, error } = useQuery({
+        queryKey: ["rooms", filterValue, sortBy, order, search, pag],
+        queryFn: () => getRoomsApi(filterValue, sortBy, order, search, pag),
         retry: false,
         onError: (error) => {
             console.log(error);
         },
     });
-    return { rooms, isLoading, isError, error };
+    return { data, isLoading, isError, error };
 }
