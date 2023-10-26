@@ -10,41 +10,28 @@ import Table from "./Table";
 import ViewBox from "../ViewBox";
 import DeletingConfirm from "../DeletingConfirm";
 
-export default function RoomRow({ room }) {
-    const { deletingRoom, isDeleting } = useDeleteRoom();
+export default function RoomRow({ roomData, categories }) {
+    const room = [roomData.number, roomData.category.name];
 
-    const tableCells = Object.keys(room)
-        .filter((key) => key !== "id")
-        .map((key) => {
-            return key === "capacity" ? (
-                <TableCell key={key}>
-                    Enough for <span className=" font-bold ">{room[key]}</span>{" "}
-                    people
-                </TableCell>
-            ) : (
-                <TableCell key={key}>
-                    {key === "price" ? `${room[key]}£` : room[key]}
-                </TableCell>
-            );
-        });
+    const { deletingRoom, isDeleting } = useDeleteRoom();
 
     return (
         <Table.Row>
-            {tableCells}
+            {room.map(value => <TableCell key={value} classes="capitalize">{value}</TableCell>)}
             <TableCell classes=" flex gap-8 text-xl">
                 <ViewBox>
-                    {/* ---------- View Box Popop To Edit ---------- */}
+                    {/* ---------- View Box Popup To Edit ---------- */}
                     <ViewBox.Open open="edit">
                         <Button typeOfButton="none">
                             <FaRegEdit className=" h-8 w-8 rounded-md p-1.5 text-gray-700 transition-all duration-300 hover:bg-indigo-600 hover:text-white" />
                         </Button>
                     </ViewBox.Open>
                     <ViewBox.Window width="w-[450px]" window="edit">
-                        <EditRoomForm id={room.id} room={room} />
+                        <EditRoomForm id={roomData.number} room={roomData} categories={categories} />
                     </ViewBox.Window>
                     {/* ---------------------------------------- */}
 
-                    {/* ---------- View Box Popop To Delete ---------- */}
+                    {/* ---------- View Box Popup To Delete ---------- */}
                     <ViewBox.Open open="delete">
                         <Button typeOfButton="none">
                             <MdOutlineDeleteOutline className=" h-8 w-8 rounded-md p-1 text-red-500 transition-all duration-300 hover:bg-red-500 hover:text-white" />
@@ -53,7 +40,7 @@ export default function RoomRow({ room }) {
                     <ViewBox.Window width="w-[400px]" window="delete">
                         <DeletingConfirm
                             isDeleting={isDeleting}
-                            onDelete={() => deletingRoom(room.id)}
+                            onDelete={() => deletingRoom(roomData.number)}
                         />
                     </ViewBox.Window>
                     {/* ---------------------------------------- */}
