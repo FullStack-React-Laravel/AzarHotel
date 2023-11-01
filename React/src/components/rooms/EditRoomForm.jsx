@@ -1,57 +1,51 @@
 import { useForm } from "react-hook-form";
 import { validateNumber } from "./servicesRoom";
+import { useEditRoom } from "../../hooks/useEditRoom";
 
 // jsx components
 import Col from "../../ui/Col";
 import Button from "../../ui/Button";
 import RowForm from "./RowForm";
-import { useEditRoom } from "../../hooks/useEditRoom";
+import Options from "../../ui/Options";
 
-export default function EditRoomForm({ room, onCloseViewBox, categories }) {
+export default function EditRoomForm({ room, onCloseViewBox }) {
     const { editRoom, isEditing } = useEditRoom(onCloseViewBox);
 
-    const { register, handleSubmit, formState } = useForm({ defaultValues: room });
+    // defaults value for inputs and select
+    const defValue = {
+        number: room.number,
+        category: room.category.name,
+    };
+    const { register, handleSubmit, formState } = useForm({
+        defaultValues: defValue,
+    });
     const { errors } = formState;
 
     function onSubmit(data) {
         editRoom({ room_number: room.number, edited_room: data });
     }
-
     return (
         <form className="px-12 pb-8 pt-12" onSubmit={handleSubmit(onSubmit)}>
             <Col classes="gap-6">
-                <RowForm
-                    error={errors?.number?.message}
-                    name="Number"
-                >
+                <RowForm error={errors?.number?.message} name="Number">
                     <input
                         {...register("number", {
                             validate: validateNumber,
+                            disabled: isEditing,
                         })}
-                        disabled={isEditing}
                         className="input"
                         id="number"
                     />
                 </RowForm>
                 <RowForm error={errors?.category?.message} name="Category">
                     <select
-                        {...register("category")}
-                        disabled={isEditing}
-                        className="input"
+                        {...register("category", {
+                            disabled: isEditing,
+                        })}
+                        className="input cursor-pointer"
                         id="category"
                     >
-                        {
-                            categories.map(
-                                category =>
-                                    <option
-                                        key={category.slug}
-                                        className="capitalize"
-                                        value={category.slug}
-                                        selected={room.category === category.slug}
-                                    >
-                                        {category.name}
-                                    </option>
-                            )}
+                        <Options />
                     </select>
                 </RowForm>
                 <div className="mt-4 flex w-full items-center justify-end gap-4">

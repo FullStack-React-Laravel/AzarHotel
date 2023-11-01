@@ -5,22 +5,22 @@ export default function Search() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [value, setValue] = useState("");
 
-    useEffect(() => {
-        const id = setTimeout(() => {
-            if (value !== searchParams.get("search") && value) {
-                searchParams.set("page", 1);
-                searchParams.set("search", value);
-            } else if (!value) {
-                searchParams.delete("page");
-                searchParams.delete("search");
-            }
+    // useEffect(() => {
+    //     const id = setTimeout(() => {
+    //         if (value !== searchParams.get("search") && value) {
+    //             searchParams.set("page", 1);
+    //             searchParams.set("search", value);
+    //         } else if (!value) {
+    //             searchParams.delete("page");
+    //             searchParams.delete("search");
+    //         }
 
-            setSearchParams(searchParams);
-        }, 500);
+    //         setSearchParams(searchParams);
+    //     }, 500);
 
-        return () => clearTimeout(id);
-        // TODO ---------------------- FIX DEP ARRY ----------------------
-    }, [value]);
+    //     return () => clearTimeout(id);
+    //     // TODO ---------------------- FIX DEP ARRY ----------------------
+    // }, [value]);
     return (
         <input
             onChange={(e) => setValue(e.target.value)}

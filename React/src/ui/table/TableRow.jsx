@@ -10,9 +10,8 @@ import Table from "./Table";
 import ViewBox from "../ViewBox";
 import DeletingConfirm from "../DeletingConfirm";
 
-export default function RoomRow({ roomData, categories }) {
+export default function RoomRow({ roomData, category }) {
     const room = [roomData.number, roomData.category.name];
-
     const { deletingRoom, isDeleting } = useDeleteRoom();
 
     return (
@@ -34,7 +33,7 @@ export default function RoomRow({ roomData, categories }) {
                         <EditRoomForm
                             id={roomData.number}
                             room={roomData}
-                            categories={categories}
+                            category={category}
                         />
                     </ViewBox.Window>
                     {/* ---------------------------------------- */}

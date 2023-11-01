@@ -10,5 +10,10 @@ export function useGetCategories() {
             console.log(error);
         },
     });
-    return { categories: data, categoriesIsLoading: isLoading, categoriesIsError: isError, categoriesError: error };
+    return {
+        categories: data,
+        categoriesIsLoading: isLoading,
+        categoriesIsError: isError,
+        categoriesError: error,
+    };
 }

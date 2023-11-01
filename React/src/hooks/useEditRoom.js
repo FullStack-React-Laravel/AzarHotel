@@ -6,7 +6,8 @@ export function useEditRoom(onCloseViewBox) {
     const query = useQueryClient();
 
     const { mutate: editRoom, isLoading: isEditing } = useMutation({
-        mutationFn: ({ room_number, edited_room }) => ApiRoom.update(room_number, edited_room),
+        mutationFn: ({ room_number, edited_room }) =>
+            ApiRoom.update(room_number, edited_room),
         onSuccess: () => {
             query.invalidateQueries({ queryKey: ["rooms"] });
             onCloseViewBox?.();

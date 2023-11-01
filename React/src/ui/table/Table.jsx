@@ -38,8 +38,8 @@ function Row({ children }) {
     );
 }
 
-function Body({ data, render }) {
-    return <div>{data.map(render)}</div>;
+function Body({ children }) {
+    return <div>{children}</div>;
 }
 
 function Footer({ children }) {

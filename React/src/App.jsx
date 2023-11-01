@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import { RoomProvider } from "./context/RoomsContext";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -24,7 +25,14 @@ function App() {
                     <Route element={<Applayout />}>
                         <Route index element={<Navigate replace to="home" />} />
                         <Route path="home" element={<Home />} />
-                        <Route path="rooms" element={<Rooms />} />
+                        <Route
+                            path="rooms"
+                            element={
+                                <RoomProvider>
+                                    <Rooms />
+                                </RoomProvider>
+                            }
+                        />
                         <Route path="bookings" element={<Bookings />} />
                         <Route path="*" element={<p>Error</p>} />
                     </Route>
