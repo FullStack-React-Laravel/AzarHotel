@@ -14,13 +14,6 @@ class StoreRoomRequest extends FormRequest
         return true;
     }
 
-
-    public function messages()
-    {
-        return [
-            'room_number.required' => 'is empty'
-        ];
-    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,10 +22,8 @@ class StoreRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'room_number' => 'required|regex:/[A-Z][0-9]{3}/|unique:rooms',
-            'type' => 'required',
-            'price' => 'required|numeric|min:0',
-            'capacity' => 'required|integer|min:0'
+            'number' => 'required|regex:/[A-Z][0-9]{3}/|unique:rooms',
+            'category' => 'required|exists:room_categories,slug',
         ];
     }
 }

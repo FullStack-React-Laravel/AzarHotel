@@ -4,15 +4,14 @@ import Table from "../../ui/table/Table";
 import TableCell from "../../ui/table/TableCell";
 import RoomRow from "../../ui/table/TableRow";
 
-export default function RoomTable({ data, rooms }) {
-    const headers = Object.keys(rooms.at(0)).filter(
-        (header) => header !== "id",
-    );
+export default function RoomTable({ data, categories }) {
+    const rooms = data?.data;
+    const header = Object.keys(rooms.at(0));
 
     return (
         <Table columns="grid-cols-[1fr_1fr_1fr_1fr_100px]">
             <Table.Header>
-                {headers.map((header) => {
+                {header.map((header) => {
                     return (
                         <Sort sortBy={header} key={header}>
                             <TableCell classes=" capitalize">
@@ -25,7 +24,7 @@ export default function RoomTable({ data, rooms }) {
             <Table.Body
                 data={rooms}
                 render={(room) => (
-                    <RoomRow key={room.room_number} room={room} />
+                    <RoomRow key={room.number} roomData={room} categories={categories} />
                 )}
             />
             <Table.Footer>

@@ -2,18 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Room;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateRoomRequest extends FormRequest
+class StoreRoomCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,11 +22,11 @@ class UpdateRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'number' => [
-                'required', 'regex:/[A-Z][0-9]{3}/',
-                Rule::unique('rooms')->ignore($this->room)
-            ],
-            'category' => 'required|exists:room_categories,slug',
+            'name' => 'required|alpha|min:3|unique:room_categories',
+            'image' => 'required|image',
+            'price' => 'required|numeric|min:0',
+            'capacity' => 'required|integer|min:0',
+            'discount' => 'required|numeric|min:0',
         ];
     }
 }

@@ -14,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('room_number')->unique();
-            $table->string('type');
-            $table->double('price');
-            $table->integer('capacity');
+            $table->string('number')->unique();
+            $table->foreignId('category_id')->constrained('room_categories');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -1,19 +1,14 @@
 import { useAddNewRoom } from "../../hooks/roomsHooks";
 
 import { useForm } from "react-hook-form";
-import {
-    validateCapacity,
-    validateNumber,
-    validatePrice,
-    validateType,
-} from "./servicesRoom";
+import { validateNumber } from "./servicesRoom";
 
 // jsx components
 import Col from "../../ui/Col";
 import Button from "../../ui/Button";
 import RowForm from "./RowForm";
 
-export default function CreateRoomForm({ attr, onCloseViewBox }) {
+export default function CreateRoomForm({ attr, onCloseViewBox, categories }) {
     const { addNewRoom, isCreating } = useAddNewRoom(onCloseViewBox);
     const { register, handleSubmit, formState } = useForm();
     const { errors } = formState;
@@ -25,45 +20,30 @@ export default function CreateRoomForm({ attr, onCloseViewBox }) {
         <form className="px-12 pb-8 pt-12" onSubmit={handleSubmit(onSubmit)}>
             <Col classes="gap-6">
                 <RowForm
-                    error={errors?.room_number?.message}
-                    name="room_number"
+                    error={errors?.number?.message}
+                    name="Number"
                 >
                     <input
-                        {...register("room_number", {
+                        {...register("number", {
                             validate: validateNumber,
                         })}
                         disabled={isCreating}
                         className="input"
-                        id="room_number"
+                        id="number"
                     />
                 </RowForm>
-                <RowForm error={errors?.type?.message} name="type">
-                    <input
-                        {...register("type", { validate: validateType })}
-                        disabled={isCreating}
+                <RowForm
+                    error={errors?.category?.message}
+                    name="Category"
+                >
+                    <select
+                        {...register("category")}
+                        id="category"
                         className="input"
-                        id="type"
-                    />
-                </RowForm>
-                <RowForm error={errors?.capacity?.message} name="capacity">
-                    <input
-                        {...register("capacity", {
-                            validate: validateCapacity,
-                        })}
                         disabled={isCreating}
-                        className="input"
-                        id="capacity"
-                    />
-                </RowForm>
-                <RowForm error={errors?.price?.message} name="price">
-                    <input
-                        {...register("price", {
-                            validate: validatePrice,
-                        })}
-                        disabled={isCreating}
-                        className="input"
-                        id="price"
-                    />
+                    >
+                        {categories.map(category => <option className="capitalize" value={category.slug} key={category.slug}>{category.name}</option>)}
+                    </select>
                 </RowForm>
                 <div className="mt-4 flex w-full items-center justify-end gap-4">
                     <Button

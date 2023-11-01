@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\RoomCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,10 +18,8 @@ class RoomFactory extends Factory
     public function definition(): array
     {
         return [
-            'room_number' => fake()->unique()->regexify($string = '[A-Z][0-9]{3}'),
-            'type' => fake()->randomElement(['King', 'Queen', 'Super', 'Gold', 'Silver', 'Diamond', 'Emerald']),
-            'price' => fake()->numberBetween(100, 1000),
-            'capacity' => fake()->numberBetween(1, 10)
+            'number' => fake()->unique()->regexify('[A-Z][0-9]{3}'),
+            'category_id' => RoomCategory::inRandomOrder()->first()->id,
         ];
     }
 }

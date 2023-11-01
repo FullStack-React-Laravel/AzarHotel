@@ -9,37 +9,53 @@ class Room extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
-        'room_number',
-        'type',
-        'price',
-        'capacity'
+        'number',
+        'category_id',
     ];
 
-    public function scopeTypesFilter($query, $types)
+    protected $with = ['category'];
+
+    protected $hidden = [
+        'id',
+        'category_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    public function getRouteKeyName()
     {
-        if ($types == 'all') return;
-        $query->whereIn('type', explode('-', $types));
+        return 'number';
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(RoomCategory::class);
+    }
+
+    public function scopeCategories($query, $categories)
+    {
+        $query->when($categories && $categories != 'all', fn ($query) => $query->whereHas(
+            'category',
+            fn ($query) => $query->whereIn('name', explode('-', $categories))
+        ));
     }
 
     public function scopeSearch($query, $search)
     {
-        $query->where(
-            fn ($query) => $query
-                ->where('room_number', 'like', "%$search%")
-                ->orWhere('type', 'like', "%$search%")
-                ->orWhere('price', $search)
-                ->orWhere('capacity', $search)
-        );
+        $query->when($search, fn ($query) => $query->where(
+            fn ($query) => $query->where('number', 'like', "%$search%")->orWhereHas(
+                'category',
+                fn ($query) => $query->where('name', 'like', "%$search%")
+            )
+        ));
     }
 
-    public function scopeSortFilter($query, $sort, $order)
+    public function scopeOrder($query, $sort, $order)
     {
-        $query->orderBy(
-            in_array($sort, $this->fillable) ? $sort : 'Id',
-            in_array($order, ['asc', 'desc']) ? $order : 'asc'
-        );
+        $arg_sort = $sort != 'category' ? $sort : RoomCategory::select('name')->whereColumn('rooms.category_id', 'room_categories.id');
+
+        $query->orderBy($arg_sort ?? 'id', $order != 'desc' ? 'asc' : 'desc');
     }
 }

@@ -2,7 +2,7 @@ import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import useCloseViewBox from "../hooks/useCloseViewBox";
 import { LiaTimesSolid } from "react-icons/lia";
-/* This Is Reuseable Compound Componets For VieBox Popop */
+/* This Is Reuseable Compound Components For VieBox Popup */
 
 // create context to manage state close & open in ViewBox components
 const viewBoxContext = createContext();

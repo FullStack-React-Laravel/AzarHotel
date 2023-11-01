@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use App\Models\Room;
+use App\Models\RoomCategory;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -14,11 +15,10 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        //! TODO: when make paginate replace get() method to paginate() method
-        return Room::sortFilter($request->sort, $request->order)
-            ->when($request->has('types'), fn ($query) => $query->typesFilter($request->types))
-            ->when($request->has('search'), fn ($query) => $query->search($request->search))
-            ->paginate(10);
+        return Room::categories($request->categories)
+            ->search($request->search)
+            ->order($request->sort, $request->order)
+            ->paginate();
     }
 
     /**
@@ -26,9 +26,10 @@ class RoomController extends Controller
      */
     public function store(StoreRoomRequest $request)
     {
-        $room = $request->validated();
+        $data = $request->validated();
+        $data['category_id'] = RoomCategory::slug($data['category'])->id;
 
-        Room::create($room);
+        Room::create($data);
 
         return ['status' => 'success'];
     }
@@ -48,12 +49,9 @@ class RoomController extends Controller
     {
         $data = $request->validated();
 
-        $room->room_number = $data['room_number'];
-        $room->type = $data['type'];
-        $room->price = $data['price'];
-        $room->capacity = $data['capacity'];
+        $data['category_id'] = ($data['category'] != $room->category->slug ? RoomCategory::slug($data['category']) : $room->category)->id;
 
-        $room->save();
+        $room->update($data);
 
         return ["status" => "success"];
     }
@@ -64,6 +62,7 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         $room->delete();
+
         return ["status" => "success"];
     }
 }
