@@ -12,8 +12,10 @@ import DeletingConfirm from "../DeletingConfirm";
 
 export default function RoomRow({ room }) {
     const { deletingRoom, isDeleting } = useDeleteRoom();
+    // room_number: 3434 , price: 54,
+    // [room_number, price]
 
-    const tableCells = Object.keys(room)
+    const tableCells = Object.keys(room) // [room_number, price]
         .filter((key) => key !== "id")
         .map((key) => {
             return key === "capacity" ? (
