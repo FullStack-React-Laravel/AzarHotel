@@ -10,36 +10,18 @@ import Table from "./Table";
 import ViewBox from "../ViewBox";
 import DeletingConfirm from "../DeletingConfirm";
 
-
-export default function RoomRow({ room }) {
-    const { deletingRoom, isDeleting } = useDeleteRoom();
-    // room_number: 3434 , price: 54,
-    // [room_number, price]
-
-    const tableCells = Object.keys(room) // [room_number, price]
-        .filter((key) => key !== "id")
-        .map((key) => {
-            return key === "capacity" ? (
-                <TableCell key={key}>
-                    Enough for <span className=" font-bold ">{room[key]}</span>{" "}
-                    people
-                </TableCell>
-            ) : (
-                <TableCell key={key}>
-                    {key === "price" ? `${room[key]}£` : room[key]}
-                </TableCell>
-            );
-        });
-
 export default function RoomRow({ roomData, categories }) {
     const room = [roomData.number, roomData.category.name];
 
     const { deletingRoom, isDeleting } = useDeleteRoom();
 
-
     return (
         <Table.Row>
-            {room.map(value => <TableCell key={value} classes="capitalize">{value}</TableCell>)}
+            {room.map((value) => (
+                <TableCell key={value} classes="capitalize">
+                    {value}
+                </TableCell>
+            ))}
             <TableCell classes=" flex gap-8 text-xl">
                 <ViewBox>
                     {/* ---------- View Box Popup To Edit ---------- */}
@@ -49,7 +31,11 @@ export default function RoomRow({ roomData, categories }) {
                         </Button>
                     </ViewBox.Open>
                     <ViewBox.Window width="w-[450px]" window="edit">
-                        <EditRoomForm id={roomData.number} room={roomData} categories={categories} />
+                        <EditRoomForm
+                            id={roomData.number}
+                            room={roomData}
+                            categories={categories}
+                        />
                     </ViewBox.Window>
                     {/* ---------------------------------------- */}
 
