@@ -8,22 +8,24 @@ import Button from "../../ui/Button";
 import RowForm from "./RowForm";
 import Options from "../../ui/Options";
 
-export default function EditRoomForm({ room, onCloseViewBox }) {
+export default function EditRoomForm({
+    roomNumber,
+    categoryName,
+    onCloseViewBox,
+}) {
     const { editRoom, isEditing } = useEditRoom(onCloseViewBox);
 
-    // defaults value for inputs and select
-    const defValue = {
-        number: room.number,
-        category: room.category.name,
-    };
     const { register, handleSubmit, formState } = useForm({
-        defaultValues: defValue,
+        defaultValues: {
+            number: roomNumber,
+            category: categoryName,
+        },
     });
     const { errors } = formState;
-
     function onSubmit(data) {
-        editRoom({ room_number: room.number, edited_room: data });
+        editRoom({ room_number: roomNumber, edited_room: data });
     }
+
     return (
         <form className="px-12 pb-8 pt-12" onSubmit={handleSubmit(onSubmit)}>
             <Col classes="gap-6">

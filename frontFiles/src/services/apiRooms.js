@@ -1,14 +1,12 @@
 import { METHOD, customFetch } from "../hooks/customFetch";
 
 export class ApiRoom {
-    static root = 'rooms';
+    static root = "rooms";
 
     static async index(args = {}) {
         const string_args = Object.keys(args)
-            .map(key => `${key}=${args[key]}`)
+            .map((key) => `${key}=${args[key]}`)
             .reduce((carry, value) => `${carry}&${value}`);
-
-        console.log(string_args)
 
         return customFetch(`${ApiRoom.root}?${string_args}`);
     }
@@ -22,11 +20,14 @@ export class ApiRoom {
     }
 
     static async update(room_number, room) {
-        return customFetch(`${ApiRoom.root}/${room_number}`, METHOD.PATCH, room);
+        return customFetch(
+            `${ApiRoom.root}/${room_number}`,
+            METHOD.PATCH,
+            room,
+        );
     }
 
     static async destroy(room_number) {
         return customFetch(`${ApiRoom.root}/${room_number}`, METHOD.DELETE);
     }
 }
-

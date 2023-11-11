@@ -3,6 +3,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { RiCustomerService2Line } from "react-icons/ri";
 import MainNavLink from "./MainNavLink";
 import Col from "./Col";
+import { BiCategoryAlt } from "react-icons/bi";
 
 export default function MainNav() {
     return (
@@ -14,6 +15,11 @@ export default function MainNav() {
             </MainNavLink>
             <MainNavLink to="rooms">
                 <MdOutlineHotel
+                    className={`text-2xl group-hover/navItem:text-white`}
+                />
+            </MainNavLink>
+            <MainNavLink to="categories">
+                <BiCategoryAlt
                     className={`text-2xl group-hover/navItem:text-white`}
                 />
             </MainNavLink>

@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import { RoomProvider } from "./context/RoomsContext";
+import Categories from "./pages/Categories";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -30,6 +31,14 @@ function App() {
                             element={
                                 <RoomProvider>
                                     <Rooms />
+                                </RoomProvider>
+                            }
+                        />
+                        <Route
+                            path="categories"
+                            element={
+                                <RoomProvider>
+                                    <Categories />
                                 </RoomProvider>
                             }
                         />

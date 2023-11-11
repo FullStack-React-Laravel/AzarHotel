@@ -4,11 +4,12 @@ import Sort from "../../ui/Sort";
 import Pagination from "../../ui/table/Pagination";
 import Table from "../../ui/table/Table";
 import TableCell from "../../ui/table/TableCell";
-import RoomRow from "../../ui/table/TableRow";
+import RoomRow from "./RoomRow";
 
 export default function RoomTable() {
     const { rooms } = useRooms();
     const roomsData = rooms.data;
+
     const header = Object.keys(rooms.data.at(0));
 
     return (
@@ -32,11 +33,11 @@ export default function RoomTable() {
                         })}
                     </Table.Header>
                     <Table.Body>
-                        {roomsData.map((room) => (
+                        {roomsData.map((room, i) => (
                             <RoomRow
                                 key={room.number}
                                 roomData={room}
-                                category={room.category}
+                                ind={i}
                             />
                         ))}
                     </Table.Body>

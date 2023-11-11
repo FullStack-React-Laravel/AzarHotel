@@ -1,26 +1,27 @@
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useDeleteRoom } from "../../hooks/roomsHooks";
-import EditRoomForm from "../../components/rooms/EditRoomForm";
+import EditRoomForm from "./EditRoomForm";
 
 // ----------------------------
-import TableCell from "./TableCell";
-import Button from "../Button";
-import Table from "./Table";
-import ViewBox from "../ViewBox";
-import DeletingConfirm from "../DeletingConfirm";
+import ViewBox from "../../ui/ViewBox";
+import DeletingConfirm from "../../ui/DeletingConfirm";
+import TableCell from "../../ui/table/TableCell";
+import Button from "../../ui/Button";
+import Table from "../../ui/table/Table";
+import BoxTooltip from "../../ui/tooltiop/BoxTooltip";
+import CategoryBox from "../categories/CategoryBoxTooltip";
 
-export default function RoomRow({ roomData, category }) {
-    const room = [roomData.number, roomData.category.name];
+export default function RoomRow({ roomData, ind }) {
+    const { number: roomNumber, category } = roomData;
     const { deletingRoom, isDeleting } = useDeleteRoom();
 
     return (
         <Table.Row>
-            {room.map((value) => (
-                <TableCell key={value} classes="capitalize">
-                    {value}
-                </TableCell>
-            ))}
+            <TableCell>{roomNumber}</TableCell>
+            <BoxTooltip toolTip={<CategoryBox category={category} />}>
+                <TableCell>{category.name}</TableCell>
+            </BoxTooltip>
             <TableCell classes=" flex gap-8 text-xl">
                 <ViewBox>
                     {/* ---------- View Box Popup To Edit ---------- */}
@@ -31,9 +32,9 @@ export default function RoomRow({ roomData, category }) {
                     </ViewBox.Open>
                     <ViewBox.Window width="w-[450px]" window="edit">
                         <EditRoomForm
-                            id={roomData.number}
-                            room={roomData}
-                            category={category}
+                            id={roomNumber}
+                            roomNumber={roomNumber}
+                            category={category.name}
                         />
                     </ViewBox.Window>
                     {/* ---------------------------------------- */}
@@ -47,7 +48,7 @@ export default function RoomRow({ roomData, category }) {
                     <ViewBox.Window width="w-[400px]" window="delete">
                         <DeletingConfirm
                             isDeleting={isDeleting}
-                            onDelete={() => deletingRoom(roomData.number)}
+                            onDelete={() => deletingRoom(roomNumber)}
                         />
                     </ViewBox.Window>
                     {/* ---------------------------------------- */}

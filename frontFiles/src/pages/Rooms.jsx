@@ -19,8 +19,8 @@ export default function Rooms() {
         categoriesError,
     } = useRooms();
 
-    if (categoriesIsError) return <p>categories: {categoriesError.message}</p>;
     if (roomsIsError) return <p>rooms: {roomsError.message}</p>;
+    if (categoriesIsError) return <p>categories: {categoriesError.message}</p>;
 
     const options = categories?.map((c) => ({ label: c.name, value: c.slug }));
 
@@ -42,3 +42,6 @@ export default function Rooms() {
         </Col>
     );
 }
+
+
+
